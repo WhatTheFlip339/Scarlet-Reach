@@ -195,7 +195,6 @@
 	thrown_bclass = BCLASS_CHOP
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/ingot/steel
-	associated_skill = /datum/skill/labor/butchering
 
 	picklvl = 0.8
 
