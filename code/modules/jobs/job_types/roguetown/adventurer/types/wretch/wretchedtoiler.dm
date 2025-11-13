@@ -7,7 +7,7 @@
 	outfit = /datum/outfit/job/roguetown/wretch/wretchedtoiler
 	category_tags = list(CTAG_WRETCH)
 	traits_applied = list(TRAIT_RITUALIST, TRAIT_ARCYNE_T2)
-	cmode_music = 'sound/music/combat_bandit_mage.ogg'
+	cmode_music = 'sound/music/combat_mastermind.ogg' //evil ass mastermind music
 	extra_context = "Choose between 2 options: being an EVIL mastermind or a WRETCHED servant" //choose between master and servant
 
 	// balance isn't real i picked these bc they're funny
