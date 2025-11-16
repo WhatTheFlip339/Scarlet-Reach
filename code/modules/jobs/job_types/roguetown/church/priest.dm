@@ -25,7 +25,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
 	whitelist_req = FALSE
 
 
-	spells = list(/obj/effect/proc_holder/spell/invoked/cure_rot, /obj/effect/proc_holder/spell/self/convertrole/templar, /obj/effect/proc_holder/spell/self/convertrole/monk)
+	spells = list(/obj/effect/proc_holder/spell/self/convertrole/templar, /obj/effect/proc_holder/spell/self/convertrole/monk)
 	outfit = /datum/outfit/job/roguetown/priest
 
 	display_order = JDO_PRIEST
@@ -189,6 +189,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
 
 	// Store old devotion in the stored sets if switching away
 	if(devotion && mind.active_miracle_set && mind.active_miracle_set != string_choice)
+		STOP_PROCESSING(SSobj, devotion)
 		mind.stored_miracle_sets[mind.active_miracle_set] = devotion
 
 	// Create or retrieve the new devotion set
@@ -307,7 +308,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
 			if(!HL.mind)
 				continue
 			if(HL.mind.assigned_role == "Grand Duke")
-				HL.mind.assigned_role = "Towner"
+				HL.mind.assigned_role = "Towner" //So they don't get the innate traits of the duke
 			//would be better to change their title directly, but that's not possible since the title comes from the job datum
 			if(HL.job == "Grand Duke")
 				HL.job = "Duke Emeritus"
@@ -413,6 +414,11 @@ GLOBAL_LIST_EMPTY(heretical_players)
 	if(stat)
 		return
 
+	// Check cooldown and show remaining time BEFORE input
+	if(!COOLDOWN_FINISHED(src, priest_apostasy))
+		to_chat(src, span_warning("You must wait [DisplayTimeText(priest_apostasy - world.time)] before marking another."))
+		return
+
 	var/inputty = input("Put an apostasy on someone, removing their ability to use miracles... (apostasy them again to remove it)", "Sinner Name") as text|null
 	if(!inputty)
 		return
@@ -445,10 +451,6 @@ GLOBAL_LIST_EMPTY(heretical_players)
 		return TRUE
 
 	// Apply apostasy
-	if(!COOLDOWN_FINISHED(src, priest_apostasy))
-		to_chat(src, span_warning("You must wait until you can mark another."))
-		return
-
 	// Check if we can curse this person
 	if(!churchecancurse(target))
 		return
@@ -521,6 +523,11 @@ code\modules\admin\verbs\divinewrath.dm has a variant with all the gods so keep 
 		to_chat(src, span_warning("I need more devotion to channel Her voice! (500 required)"))
 		return FALSE
 
+	// Check cooldown and show remaining time BEFORE input
+	if(!COOLDOWN_FINISHED(src, priest_curse))
+		to_chat(src, span_warning("You must wait [DisplayTimeText(priest_curse - world.time)] before invoking another curse."))
+		return
+
 	var/target_name = input("Who shall receive a curse?", "Target Name") as text|null
 	if(!target_name)
 		return
@@ -540,16 +547,16 @@ code\modules\admin\verbs\divinewrath.dm has a variant with all the gods so keep 
 		return FALSE
 
 	var/list/curse_choices = list(
-		"Curse of Astrata" = /datum/curse/astrata,
-		"Curse of Noc" = /datum/curse/noc,
-		"Curse of Dendor" = /datum/curse/dendor,
-		"Curse of Ravox" = /datum/curse/ravox,
-		"Curse of Necra" = /datum/curse/necra,
-		"Curse of Pestra" = /datum/curse/pestra,
-		"Curse of Eora" = /datum/curse/eora,
-		"Curse of Abyssor" = /datum/curse/abyssor,
-		"Curse of Malum" = /datum/curse/malum,
-		"Curse of Xylix" = /datum/curse/xylix,
+		"Curse of Astrata" = /datum/curse/astrata, // cannot sleep and burn up in sunlight
+		"Curse of Noc" = /datum/curse/noc, // cannot use magic and burn up in moonlight
+		"Curse of Dendor" = /datum/curse/dendor, // x5 damage by vines
+		"Curse of Ravox" = /datum/curse/ravox, //your way to deal with TOP 10 ROGUE BUILD PLAYERS. They lose ~2 level of their combat skills (-30 parry dodge accuracy)
+		"Curse of Necra" = /datum/curse/necra, //they cannot be revived
+		"Curse of Pestra" = /datum/curse/pestra, //annoying effects
+		"Curse of Eora" = /datum/curse/eora, //locks their 50% erp buttons and they cannot end up
+		"Curse of Abyssor" = /datum/curse/abyssor, //water burns them
+		"Curse of Malum" = /datum/curse/malum, //They cannot craft or touch smith hammer
+		"Curse of Xylix" = /datum/curse/xylix, // no fortune
 	)
 
 	var/curse_pick = input("Choose a curse to apply or lift.", "Select Curse") as null|anything in curse_choices
@@ -574,10 +581,6 @@ code\modules\admin\verbs\divinewrath.dm has a variant with all the gods so keep 
 		to_chat(src, span_syndradio("[target.real_name] is already afflicted by another curse."))
 		message_admins("DIVINE CURSE: [real_name] ([ckey]) has attempted to strike [target.real_name] ([target.ckey]) with [curse_pick]")
 		log_game("DIVINE CURSE: [real_name] ([ckey]) has attempted to strike [target.real_name] ([target.ckey]) with [curse_pick]")
-		return
-
-	if(!COOLDOWN_FINISHED(src, priest_curse))
-		to_chat(src, span_warning("You must wait before invoking a curse again."))
 		return
 
 	// Check if we can curse this person
