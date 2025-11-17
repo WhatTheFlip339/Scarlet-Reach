@@ -8,9 +8,10 @@
 	origin_default = /datum/virtue/origin/etrusca
 	origin = "Etrusca"
 	base_name = "Beastvolk"
+	use_titles = TRUE
+	race_titles = list("True Lamia", "Mervolk", "Naga", "Siren", "Gorgon")
 	desc = "<b>Lamia: Raiders of the Coast</b><br>\
 	Like the wildkin of the lands of Enigma, Lamia are a catch-all umbrella term for various humanized spawn of the deep made by Abyssor’s hand. \
-	Mermaids, naga, and sirens all fall into this category. \
 	They are common in warm coastal regions, where their tribes formed villages after being spat out from the tide. \
 	Their history is of conducting raids of terror against the civilized coastal regions, \
 	and the burning of helpless trade vessels that neared their waters. Widely shunned and hardly trusted, many sailors have died at their hands. \
