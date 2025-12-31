@@ -18,6 +18,11 @@
 	devotion_cost = 10
 	var/base_healing = 2.5 // how much we heal per tick
 
+/obj/effect/proc_holder/spell/invoked/lesser_heal/zizo
+	name = "Miracle"
+	desc = "Call upon ZIZO to heal your target"
+	icon_state = "zizoheal"
+
 /obj/effect/proc_holder/spell/invoked/lesser_heal/free //using this for a simplemob spell
 	releasedrain = 0
 	devotion_cost = 0
