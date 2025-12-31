@@ -44,6 +44,8 @@
 		H.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/lockpicking, 1, TRUE)
 	if(H.patron?.type == /datum/patron/inhumen/zizo)
+		target.mind?.RemoveSpell(new /obj/effect/proc_holder/spell/invked/lesser_heal)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/lesser_heal/zizo)
 		H.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		ADD_TRAIT(H, TRAIT_NOSTINK, TRAIT_GENERIC)
