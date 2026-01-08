@@ -1,35 +1,23 @@
 /datum/language/thievescant
 	name = "Thieves' Cant"
 	desc = ""
-	speech_verb = "says"
-	ask_verb = "asks"
-	exclaim_verb = "yells"
+	speech_verb = "jabs"
+	ask_verb = "presses"
+	exclaim_verb = "cuts"
 	key = "x"
-	flags = LANGUAGE_HIDE_ICON_IF_UNDERSTOOD | LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD | TONGUELESS_SPEECH | SIGNLANG
+	flags = LANGUAGE_HIDE_ICON_IF_UNDERSTOOD | LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD 
 	space_chance = 66
 	default_priority = 80
-	icon_state = "asse"
-	spans = list(SPAN_PAPYRUS)
-	signlang_verb = list(
-		"scrunches their nose",
-		"smiles",
-		"grins",
-		"frowns",
-		"smacks their lips",
-		"bites their lip",
-		"yawns",
-		"squints",
-		"winks",
-		"darts their eyes left and right",
-		"stares blankly",
-		"raises an eyebrow",
-		"shrugs",
-		"stretches",
-		"makes a rude gesture",
-		"nods",
-		"nods twice",
-		"nods thrice",
-		"shakes their head",
-		"leans to their left",
-		"leans to their right"
-	)
+	icon_state = "galcom"
+	syllables = list(
+		"cove", "wart", "kin", "wife", "friend", "file",
+		"keen", "open", "bottle", "stall", "yard",
+		"pester", "old", "mill", "buzz", "wicker", "jump",
+		"roost", "rum", "volf", "flash", "tally",
+		"coal", "zad", "surcoat", "hairy", "time",
+		"weather", "beggar", "boots", "ale", "dice",
+		"lovely", "read", "bushel", "saw", "stroll",
+		"dance", "grain", "glint", "kiss", "shine",
+		"market", "road", "lamptern", "gate", "bench",
+		"pale", "beespider", "cloudy", "the", "and",
+		"ever", "without", "clearly", "sad", "my")
