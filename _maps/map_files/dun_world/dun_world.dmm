@@ -36618,21 +36618,13 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/goblindungeon)
 "jEF" = (
-/obj/item/roguekey/nightmaiden{
-	lockid = "bdsm";
-	name = "tough love key"
-	},
-/obj/item/roguekey/nightmaiden{
-	lockid = "bdsm";
-	name = "tough love key"
-	},
-/obj/item/roguekey/nightmaiden{
-	lockid = "bdsm";
-	name = "tough love key"
-	},
 /obj/item/roguekey/nightman,
 /obj/item/roguekey/nightman,
 /obj/structure/closet/crate/drawer,
+/obj/item/roguekey/nightmaiden,
+/obj/item/roguekey/nightmaiden,
+/obj/item/roguekey/nightmaiden,
+/obj/item/roguekey/nightmaiden,
 /turf/open/floor/rogue/tile/harem2,
 /area/rogue/indoors/town/bath)
 "jEK" = (
